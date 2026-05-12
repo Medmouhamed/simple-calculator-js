@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculator</title>
+  <link rel="stylesheet" href="calculator.css" />
+</head>
+<body>
+  <div class="calculator">
+    <input type="text" id="result" disabled />
+
+    <div class="buttons">
+      <button class="op" onclick="clearDisplay()">C</button>
+      <button class="op" onclick="deleteLast()">⌫</button>
+      <button class="op" onclick="insert()">%</button>
+      <button class="aa   op" onclick="">/</button>
+
+      <button class="aa" onclick="">7</button>
+      <button class="aa" onclick="">8</button>
+      <button class="aa" onclick="">9</button>
+      <button class="aa  op" onclick="">*</button>
+
+      <button class="aa" onclick="">4</button>
+      <button class="aa" onclick="">5</button>
+      <button class="aa" onclick="">6</button>
+      <button class="aa  op" onclick="">-</button>
+
+      <button class="aa" onclick="">1</button>
+      <button class="aa" onclick="">2</button>
+      <button class="aa" onclick="">3</button>
+      <button class="aa  op" onclick="">+</button>
+
+      <button class="aa" onclick="">0</button>
+      <button class="aa" onclick="">.</button>
+      <button class="aa" onclick="">00</button>
+      <button class="op" onclick="calculate()">=</button>
+    </div>
+
+    <div class="advanced">
+      <button onclick="sqrt()">√</button>
+      <button onclick="power()">x²</button>
+      <button onclick="inverse()">1/x</button>
+      <button onclick="changeSign()">±</button>
+    </div>
+  </div>
+
+  <script>
+    let result = document.querySelector("#result");
+    let btn = document.querySelectorAll(".aa");
+    function put(){
+        btn.forEach(button =>{
+        button.addEventListener("click", ()=>{
+            result.value += button.textContent;
+        })
+    })
+    }
+    
+    put();
+    
+    function clearDisplay(){
+        result.value="";
+    }
+
+    function deleteLast(){
+        result.value = result.value.slice(0,-1);
+    }
+
+    function calculate(){
+        try{
+            result.value = eval(result.value);
+        }catch{
+            result.value = "error";
+            
+        }
+    }
+
+    function changeSign(){
+      result.value = eval(result.value)*-1;
+    }
+
+    function inverse(){
+      result.value = 1/eval(result.value);
+    }
+
+    function power(){
+      result.value = eval(result.value)*eval(result.value);
+      // result.value = Math.pow((result.value));
+    }
+
+    function sqrt(){
+      result.value = Math.sqrt((result.value));
+    }
+
+    function insert(){
+      result.value = eval(result.value)/100;
+    }
+
+  </script>
+</body>
+</html>
